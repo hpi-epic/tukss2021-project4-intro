@@ -10,3 +10,7 @@ Get to know the technologies used in this project:
 * Join the [Camunda University Slack](https://camunda-university.slack.com), search the [Camunda Forum](https://forum.camunda.org) or ask the teaching team in case of questions.
 * Adapt the example to a small custom workflow that is relevant for you (and adapt the worker script). Maybe some data can be fetched from a [remote API](https://apilist.fun)?
 * Publish the BPMN diagram and the worker code together with your notes in a separate folder in a forked repository and open a Pull Request to this repository with your changes
+
+## Tips:
+* Should you a direct URL of the deployed Camunda Engine not work, visit the root page, i.e. `localhost:8080` and navigate from there
+* If prompted for a login, use `demo/demo`
