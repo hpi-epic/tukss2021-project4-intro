@@ -14,3 +14,4 @@ Get to know the technologies used in this project:
 ## Tips:
 * Should you a direct URL of the deployed Camunda Engine not work, visit the root page, i.e. `localhost:8080` and navigate from there
 * If prompted for a login, use `demo/demo`
+* I've run into an issue with `external forms` and opened an issue on the Camunda Forum: https://forum.camunda.org/t/quick-start-guide-out-of-date-404-on-external-form/27314
