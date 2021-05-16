@@ -26,8 +26,6 @@ client.subscribe("charge-card", async function ({ task, taskService }) {
     `Charging credit card with an amount of ${amount}€ for the item '${item}'...`
   );
 
-  open("https://docs.camunda.org/get-started/quick-start/success");
-
   // Complete the task
   await taskService.complete(task);
 });
