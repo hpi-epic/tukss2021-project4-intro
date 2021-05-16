@@ -1,4 +1,5 @@
-from requests import post
+from requests import post, get
+from random import choice
 from time import sleep
 from typing import List, TypedDict, Dict, Union, Iterable
 
@@ -6,6 +7,7 @@ WORKER_ID = "worker123"
 URL = "http://localhost:8080/engine-rest/external-task/"
 fetch_and_lock_url = URL + "fetchAndLock"
 complete_url = lambda id: URL + id + "/complete"
+unlock_url = lambda id: URL + id + "/unlock"
 
 
 class TopicBase(TypedDict):
@@ -65,13 +67,13 @@ def receive_tasks(interval: int = 1) -> Iterable[FetchAndLockResponse]:
             fetch_and_lock_url,
             json=FetchAndLock(
                 workerId=WORKER_ID,
-                maxTasks=2,
+                maxTasks=1,
                 usePriority=True,
                 topics=[
                     Topic(
-                        topicName="charge-card",
+                        topicName="analyze-bitcoin",
                         lockDuration=10_000,
-                        variables=["item", "amount"],
+                        variables=[],
                     )
                 ],
             ),
@@ -82,10 +84,21 @@ def receive_tasks(interval: int = 1) -> Iterable[FetchAndLockResponse]:
 
 
 for task in receive_tasks(interval=1):
-    post(
-        complete_url(task["id"]),
-        json=Complete(workerId=WORKER_ID, variables=task["variables"]),
-    )
-    print(
-        f"Charging credit card with an amount of {task['variables']['amount']['value']}€ for the item '{task['variables']['item']['value']}'..."
-    )
+    response = get("https://api.coindesk.com/v1/bpi/currentprice.json")
+    if response.status_code == 200:
+        price = response.json()["bpi"]["EUR"]["rate_float"]
+        buy = choice((True, False))
+        print(f"Analyzing bitcoin at price {price}: {'BUY' if buy else 'HODL'}...")
+        response = post(
+            complete_url(task["id"]),
+            json=Complete(
+                workerId=WORKER_ID,
+                variables={
+                    "price": Variable(value=420),
+                    "buy": Variable(value=True),
+                },
+            ),
+        )
+    else:
+        print(f"Analysis failed, trying again later...")
+        post(unlock_url(task["id"]))
