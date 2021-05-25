@@ -1,6 +1,30 @@
 # Building an ERP with BPMN &amp; Workflow Engines
-## TuKSS2021 Group Project #4 Intro
+## Demos using the Camunda Platform
 
+### Bitcoin Analysis
+
+In the fast-pacesd world of cryptocurrency, this demo by Fabian checks the Bitcoin price every minute using an external API. We then execute a bold investment strategy with the following:
+
+```Python
+from random import choice
+buy = choice((True, False))
+```
+
+The check whether we spend more than we can is implemented in a DMN.
+
+![BPMN diagram](bitcoin-analysis/analyze.png)
+
+### Closing Time
+
+After a long day in the home office, it's time to unwind in Caterina's demo. If it's been a tough day and you need a glass of wine, you can enter the required amount into a form with a generous default value. And the activity `drink wine` is also modeled. Cheers!
+
+```HTML
+<camunda:formField id="wine_need" label="Wine Need" type="long" defaultValue="5" />
+```
+
+![BPMN diagram](closing-time/ClosingTimeDiagramm.png)
+
+## Exercise
 Get to know the technologies used in this project:
 
 * Install the Camunda Platform (the open-source workflow engine, we recommend using Docker) & the Camunda modeler: https://camunda.com/download/
