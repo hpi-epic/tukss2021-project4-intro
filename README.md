@@ -41,6 +41,3 @@ Altanbagana's demo workflow takes us to the domain of online shopping. The BPMN 
 ![BPMN diagram](order-fulfillment/fulfillment.png)
 
 ![DMN](order-fulfillment/giftdecision.png)
-
-
-* I've run into an issue with `external forms` and opened an issue on the Camunda Forum: https://forum.camunda.org/t/quick-start-guide-out-of-date-404-on-external-form/27314
