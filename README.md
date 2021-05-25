@@ -3,7 +3,9 @@
 One of the projects that students work on as part of the HPI lecture ["Trends and Concepts in the Software Industry I"](https://hpi.de/plattner/teaching/summer-term-2021/trends-and-concepts-in-the-software-industry-i.html) in the summer term 2021 is using process/[workflow engines](https://en.wikipedia.org/wiki/Workflow_engine) to execute core enterprise processes.
 
 The [Camunda Platform](https://camunda.com/products/camunda-platform/) is an [open-source](https://github.com/camunda/camunda-bpm-platform) BPMN workflow engine.
-To get to know the technology, the team consisting of [Fabian](https://github.com/fabianhe), [Moritz](https://github.com/manner), [Caterina](https://github.com/caterinamandel98) and [Altanbagana](https://github.com/Altanbagana92) created the following demos:
+To get to know the technology, the team consisting of [Fabian](https://github.com/fabianhe), [Moritz](https://github.com/manner), [Caterina](https://github.com/caterinamandel98) and [Altanbagana](https://github.com/Altanbagana92) created the following demos.
+
+Every demo is included in this repository in its own subdirectory.
 
 ## 💰 Bitcoin Analysis
 
