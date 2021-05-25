@@ -1,0 +1,26 @@
+{
+  "name": "tukss2021-project4-intro",
+  "version": "1.0.0",
+  "description": "Get to know the technologies used in this project:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fabianhe/tukss2021-project4-intro.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fabianhe/tukss2021-project4-intro/issues"
+  },
+  "homepage": "https://github.com/fabianhe/tukss2021-project4-intro#readme",
+  "dependencies": {
+    "camunda-external-task-client-js": "^2.1.0"
+  },
+  "devDependencies": {
+    "open": "^8.0.8"
+  }
+}
