@@ -1,20 +1,25 @@
-# Building an ERP with BPMN &amp; Workflow Engines
-## Demos using the Camunda Platform
+# Demos using the Camunda Platform
 
-### Bitcoin Analysis
+One of the projects that students work on in the as part of the HPI lecture ["Trends and Concepts in the Software Industry I"](https://hpi.de/plattner/teaching/summer-term-2021/trends-and-concepts-in-the-software-industry-i.html) in the summer term 2021 is using process/[workflow engines](https://en.wikipedia.org/wiki/Workflow_engine) to execute core enterprise processes.
 
-In the fast-pacesd world of cryptocurrency, this demo by Fabian checks the Bitcoin price every minute using an external API. We then execute a bold investment strategy with the following:
+The [Camunda Platform](https://camunda.com/products/camunda-platform/) is an [open-source](https://github.com/camunda/camunda-bpm-platform) BPMN workflow engine.
+To get to know the technology, the team consisting of [Fabian](https://github.com/fabianhe), [Moritz](https://github.com/manner), [Caterina](https://github.com/caterinamandel98) and [Altanbagana](https://github.com/Altanbagana92) created the following demos:
+
+## Bitcoin Analysis
+
+In the fast-paced world of cryptocurrency, this demo by Fabian using Python checks the Bitcoin price every minute using an external API by coindesk.com. 
+It then executes a bold investment strategy with the following:
 
 ```Python
 from random import choice
 buy = choice((True, False))
 ```
 
-The check whether we spend more than we can is implemented in a DMN.
+The check whether we would spend more than we currently can (`Check funds`) is implemented in an activity using a DMN matrix.
 
 ![BPMN diagram](bitcoin-analysis/analyze.png)
 
-### Closing Time
+## Closing Time
 
 After a long day in the home office, it's time to unwind in Caterina's demo. If it's been a tough day and you need a glass of wine, you can enter the required amount into a form with a generous default value. And the activity `drink wine` is also modeled. Cheers!
 
@@ -24,18 +29,18 @@ After a long day in the home office, it's time to unwind in Caterina's demo. If 
 
 ![BPMN diagram](closing-time/ClosingTimeDiagramm.png)
 
-## Exercise
-Get to know the technologies used in this project:
+## Temperature Reminder
 
-* Install the Camunda Platform (the open-source workflow engine, we recommend using Docker) & the Camunda modeler: https://camunda.com/download/
-* Follow the Camunda Quick Start guide: https://docs.camunda.org/get-started/quick-start/
-* We recommend you follow the examples using JavaScript and NodeJS in the Quick Start Guide
-* Note any observations you make along the way (feedback for the Camunda folks)
-* Join the [Camunda University Slack](https://camunda-university.slack.com), search the [Camunda Forum](https://forum.camunda.org) or ask the teaching team in case of questions.
-* Adapt the example to a small custom workflow that is relevant for you (and adapt the worker script). Maybe some data can be fetched from a [remote API](https://apilist.fun)?
-* Publish the BPMN diagram and the worker code together with your notes in a separate folder in a forked repository and open a Pull Request to this repository with your changes
+Are you someone who forgets to turn on the heating when it's getting cold out? Moritz's demo can send you a reminder message using the Telegram platform if the temperature drops below 18°C. The demo uses the [Telegram API](https://github.com/yagop/node-telegram-bot-api), called from a JavaScript worker.
 
-## Tips:
-* Should you a direct URL of the deployed Camunda Engine not work, visit the root page, i.e. `localhost:8080` and navigate from there
-* If prompted for a login, use `demo/demo`
+![BPMN diagram](temperature-reminder/temperature-reminder.png)
+
+## Order Fulfillment
+Altanbagana's demo workflow takes us to the domain of online shopping. The BPMN model includes logic to split large orders going to outside of the EU and a decision matrix for gift selection.
+
+![BPMN diagram](order-fulfillment/fulfillment.png)
+
+![DMN](order-fulfillment/giftdecision.png)
+
+
 * I've run into an issue with `external forms` and opened an issue on the Camunda Forum: https://forum.camunda.org/t/quick-start-guide-out-of-date-404-on-external-form/27314
