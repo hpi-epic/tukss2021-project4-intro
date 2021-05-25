@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1sihbzx" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.8.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="payment-retrieval" name="Payment Retrieval" isExecutable="true">
+    <bpmn:startEvent id="Event_11iapp3" name="closing time">
+      <bpmn:outgoing>Flow_10tw03a</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_10tw03a" sourceRef="Event_11iapp3" targetRef="Activity_0ta97xm" />
+    <bpmn:sequenceFlow id="Flow_0arrx6b" sourceRef="Activity_0ta97xm" targetRef="time_for_wine" />
+    <bpmn:exclusiveGateway id="time_for_wine" name="Time for wine?" default="Flow_19lafvs">
+      <bpmn:incoming>Flow_0arrx6b</bpmn:incoming>
+      <bpmn:outgoing>Flow_1qxkta5</bpmn:outgoing>
+      <bpmn:outgoing>Flow_19lafvs</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1qxkta5" name="Yes" sourceRef="time_for_wine" targetRef="calculate_amount">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${wine_need&lt;=0}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:exclusiveGateway id="Gateway_0rsv6hl" name="Sure?">
+      <bpmn:incoming>Flow_19lafvs</bpmn:incoming>
+      <bpmn:outgoing>Flow_0alqkp8</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_19lafvs" sourceRef="time_for_wine" targetRef="Gateway_0rsv6hl" />
+    <bpmn:sequenceFlow id="Flow_0alqkp8" name="No, Wine is needed" sourceRef="Gateway_0rsv6hl" targetRef="calculate_amount" />
+    <bpmn:sequenceFlow id="Flow_00hzsri" sourceRef="calculate_amount" targetRef="Activity_0bsm9zr" />
+    <bpmn:sequenceFlow id="Flow_12g1sp5" sourceRef="Activity_0bsm9zr" targetRef="Activity_18ep7qe" />
+    <bpmn:endEvent id="Event_0pqq16g" name="enjoyed closing time">
+      <bpmn:incoming>Flow_0fm8tk1</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0fm8tk1" sourceRef="Activity_18ep7qe" targetRef="Event_0pqq16g" />
+    <bpmn:serviceTask id="calculate_amount" name="Calculate Amount" camunda:type="external" camunda:topic="calculate-amount">
+      <bpmn:incoming>Flow_1qxkta5</bpmn:incoming>
+      <bpmn:incoming>Flow_0alqkp8</bpmn:incoming>
+      <bpmn:outgoing>Flow_00hzsri</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Activity_0bsm9zr" name="Pour wine">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="wine_need" label="Wine Need" type="long" defaultValue="5" />
+          <camunda:formField id="poured" label="Poured?" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_00hzsri</bpmn:incoming>
+      <bpmn:outgoing>Flow_12g1sp5</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_18ep7qe" name="Drink Wine">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="done" label="Done?" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_12g1sp5</bpmn:incoming>
+      <bpmn:outgoing>Flow_0fm8tk1</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:manualTask id="Activity_0ta97xm" name="Close Laptop">
+      <bpmn:incoming>Flow_10tw03a</bpmn:incoming>
+      <bpmn:outgoing>Flow_0arrx6b</bpmn:outgoing>
+    </bpmn:manualTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="payment-retrieval">
+      <bpmndi:BPMNEdge id="Flow_10tw03a_di" bpmnElement="Flow_10tw03a">
+        <di:waypoint x="198" y="140" />
+        <di:waypoint x="250" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0arrx6b_di" bpmnElement="Flow_0arrx6b">
+        <di:waypoint x="350" y="140" />
+        <di:waypoint x="445" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1qxkta5_di" bpmnElement="Flow_1qxkta5">
+        <di:waypoint x="495" y="140" />
+        <di:waypoint x="590" y="140" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="534" y="122" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19lafvs_di" bpmnElement="Flow_19lafvs">
+        <di:waypoint x="470" y="165" />
+        <di:waypoint x="470" y="260" />
+        <di:waypoint x="615" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0alqkp8_di" bpmnElement="Flow_0alqkp8">
+        <di:waypoint x="640" y="235" />
+        <di:waypoint x="640" y="180" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="651" y="205" width="57" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00hzsri_di" bpmnElement="Flow_00hzsri">
+        <di:waypoint x="690" y="140" />
+        <di:waypoint x="790" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12g1sp5_di" bpmnElement="Flow_12g1sp5">
+        <di:waypoint x="890" y="140" />
+        <di:waypoint x="990" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0fm8tk1_di" bpmnElement="Flow_0fm8tk1">
+        <di:waypoint x="1090" y="140" />
+        <di:waypoint x="1192" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_11iapp3_di" bpmnElement="Event_11iapp3">
+        <dc:Bounds x="162" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="151" y="165" width="59" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1ivm6ev_di" bpmnElement="time_for_wine" isMarkerVisible="true">
+        <dc:Bounds x="445" y="115" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="435" y="85" width="72" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0rsv6hl_di" bpmnElement="Gateway_0rsv6hl" isMarkerVisible="true">
+        <dc:Bounds x="615" y="235" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="627" y="292" width="30" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0pqq16g_di" bpmnElement="Event_0pqq16g">
+        <dc:Bounds x="1192" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1172" y="165" width="76" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1t6yhoj_di" bpmnElement="calculate_amount">
+        <dc:Bounds x="590" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ltga3u_di" bpmnElement="Activity_0bsm9zr">
+        <dc:Bounds x="790" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_027tvrh_di" bpmnElement="Activity_18ep7qe">
+        <dc:Bounds x="990" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_18x9rsl_di" bpmnElement="Activity_0ta97xm">
+        <dc:Bounds x="250" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
